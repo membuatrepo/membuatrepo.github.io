@@ -1,0 +1,12 @@
+{
+  "name": "KaskusChat",
+  "short_name": "KaskusChat",
+  "theme_color": "#2196f3",
+  "background_color": "#2196f3",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "Scope": "/",
+  "start_url": "/",
+  "icons": null,
+  "splash_pages": null
+}
