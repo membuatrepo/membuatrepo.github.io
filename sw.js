@@ -1,5 +1,5 @@
-var dataCacheName = 'stanza.io-data-2';
-var cacheName = 'stanza.io-PWA-2';
+var dataCacheName = 'stanza.io-data-3';
+var cacheName = 'stanza.io-PWA-3';
 var filesToCache = [
   '/',
   '/index.html',
