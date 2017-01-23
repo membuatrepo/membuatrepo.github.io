@@ -38,8 +38,6 @@ self.addEventListener('install', function(e) {
 self.addEventListener('activate', function(e) {
   console.log('[ServiceWorker] Activate');
 
-  XMPP = require('stanza.io');
-  console.log(XMPP);
   e.waitUntil(
     caches.keys().then(function(keyList) {
       return Promise.all(keyList.map(function(key) {
