@@ -15,9 +15,77 @@
 			})
 		}()
 		</script>
-<script>if ('serviceWorker' in navigator) {
-	  navigator.serviceWorker.register('/sw.js').then(function (swReg) {
-	    console.log('Service Worker Registered');
-	    swRegistration = swReg;
-	  });
-	}</script></body></html>
+		<script>
+		let swRegistration;
+
+
+		let config = {
+			apiKey: "AIzaSyBJvp8EUww0JekGFTVIGwGfeKQ4d8QRgkE",
+			authDomain: "kaskus-chat-df24f.firebaseapp.com",
+			databaseURL: "https://kaskus-chat-df24f.firebaseio.com",
+			storageBucket: "kaskus-chat-df24f.appspot.com",
+			messagingSenderId: "337221431705"
+		};
+
+
+		firebase.initializeApp(config);
+		const messaging = firebase.messaging();
+
+		messaging.requestPermission()
+				.then(function () {
+						console.log('Notification permission grantedd.');
+						return messaging.getToken();
+				})
+				.then(function (token) {
+						subscribeTokenToTopic(token,"channel_" + asciiToHex("jokerfantasy"))
+						console.log(token);
+				})
+				.catch(function (err) {
+						console.log('Unable to get permission to notify.', err);
+				});
+
+
+		if ('serviceWorker' in navigator && 'PushManager' in window) {
+				navigator.serviceWorker
+						.register('./firebase-messaging-sw.js')
+						.then(function (swReg) {
+								console.log('Service Worker Registeredd');
+								swRegistration = swReg;
+						});
+		}
+		function StringBuffer() {
+				this.__strings__ = new Array;
+		}
+
+		StringBuffer.prototype.append = function (str) {
+				this.__strings__.push(str);
+		};
+
+		StringBuffer.prototype.toString = function () {
+				return this.__strings__.join("");
+		};
+
+		function asciiToHex( asciiValue) {
+				var hex = new StringBuffer();
+				for (var i = 0; i < asciiValue.length; i++) {
+						hex.append(asciiValue.charCodeAt(i).toString(16));
+				}
+
+				return hex.toString();
+		}
+
+		function subscribeTokenToTopic(token, topic) {
+			fetch('http://52.22.102.225/index.php/'+token+'/'+topic, {
+				method: 'POST'
+			}).then(response => {
+				if (response.status < 200 || response.status >= 400) {
+					throw 'Error subscribing to topic: '+response.status + ' - ' + response.text();
+				}
+				console.log('Subscribed to "'+topic+'"');
+			}).catch(error => {
+				console.error(error);
+			})
+		}
+		</script>
+	</body>
+</html>
