@@ -1,29 +1,22 @@
 {
-  "name": "KaskusChat",
-  "short_name": "KaskusChat",
+  "name": "Kaskus",
   "theme_color": "#2196f3",
   "background_color": "#2196f3",
-  "display": "fullscreen",
+  "display": "standalone",
   "orientation": "portrait",
-  "Scope": "/",
-  "start_url": "/",
+  "scope": "/",
+  "start_url": "/index.html",
   "icons": [
     {
-      "src": "logo.png",
-      "sizes": "96x96",
-      "type": "image/png"
-    },
-    {
-      "src": "logo.png",
-      "sizes": "144x144",
-      "type": "image/png"
-    },
-    {
-      "src": "logo.png",
+      "src": "/android-chrome-192x192.png",
       "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ],
-  "gcm_sender_id": "103953800507",
-  "splash_pages": null
+  "gcm_sender_id": "103953800507"
 }

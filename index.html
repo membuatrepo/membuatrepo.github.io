@@ -1,92 +1,75 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>KASKUS Chat</title><link rel="manifest" href="/manifest.json"/><link rel="stylesheet" href="https://ping-prod-static.s3-ap-southeast-1.amazonaws.com/kaskus-chat/latest/node_modules/bootstrap/dist/css/bootstrap.min.css" /><link rel="stylesheet" href="https://ping-prod-static.s3-ap-southeast-1.amazonaws.com/kaskus-chat/latest/node_modules/font-awesome/css/font-awesome.min.css" /><script type="text/javascript" src="https://ping-prod-static.s3-ap-southeast-1.amazonaws.com/kaskus-chat/latest/node_modules/jquery/dist/jquery.min.js"></script><script type="text/javascript" src="https://ping-prod-static.s3-ap-southeast-1.amazonaws.com/kaskus-chat/latest/node_modules/bootstrap/dist/js/bootstrap.min.js"></script><script type="text/javascript">
-		_atrk_opts = { atrk_acct:"edrok1a0Sn00is", domain:"kaskus.co.id",dynamic: true};
-		(function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
-		</script><noscript><img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=edrok1a0Sn00is" style="display:none" height="1" width="1" alt="" /></noscript></head><body><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-KGKS6M" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-		'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-		})(window,document,'script','dataLayer','GTM-KGKS6M');</script><div id="root"></div><script type="text/javascript" src="https://ping-prod-static.s3-ap-southeast-1.amazonaws.com/kaskus-chat/latest/bundle.js" charset="utf-8"></script><script type="text/javascript">
-		+function() {
-			loadApp('root', {
-				loginPage: false,
-				tokenEndpoint: '/token',
-				domain: 'kaskus-s.obrol.id',
-				connectionUrl: 'wss://kaskus-s.obrol.id:5281/websocket'
-			})
-		}()
-		</script>
-		<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
-		<script>
-		let swRegistration;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KASKUS Chat</title>
 
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
 
-		let config = {
-			apiKey: "AIzaSyBJvp8EUww0JekGFTVIGwGfeKQ4d8QRgkE",
-			authDomain: "kaskus-chat-df24f.firebaseapp.com",
-			databaseURL: "https://kaskus-chat-df24f.firebaseio.com",
-			storageBucket: "kaskus-chat-df24f.appspot.com",
-			messagingSenderId: "337221431705"
-		};
-
-
-		firebase.initializeApp(config);
-		const messaging = firebase.messaging();
-
-		messaging.requestPermission()
-				.then(function () {
-						console.log('Notification permission grantedd.');
-						return messaging.getToken();
-				})
-				.then(function (token) {
-						subscribeTokenToTopic(token,"channel_" + asciiToHex("jokerfantasy"))
-						console.log(token);
-				})
-				.catch(function (err) {
-						console.log('Unable to get permission to notify.', err);
-				});
-
-
-		if ('serviceWorker' in navigator && 'PushManager' in window) {
-				navigator.serviceWorker
-						.register('./firebase-messaging-sw.js')
-						.then(function (swReg) {
-								console.log('Service Worker Registeredd');
-								swRegistration = swReg;
-						});
-		}
-		function StringBuffer() {
-				this.__strings__ = new Array;
-		}
-
-		StringBuffer.prototype.append = function (str) {
-				this.__strings__.push(str);
-		};
-
-		StringBuffer.prototype.toString = function () {
-				return this.__strings__.join("");
-		};
-
-		function asciiToHex( asciiValue) {
-				var hex = new StringBuffer();
-				for (var i = 0; i < asciiValue.length; i++) {
-						hex.append(asciiValue.charCodeAt(i).toString(16));
-				}
-
-				return hex.toString();
-		}
-
-		function subscribeTokenToTopic(token, topic) {
-			fetch('http://52.22.102.225/index.php/'+token+'/'+topic, {
-				method: 'POST'
-			}).then(response => {
-				if (response.status < 200 || response.status >= 400) {
-					throw 'Error subscribing to topic: '+response.status + ' - ' + response.text();
-				}
-				console.log('Subscribed to "'+topic+'"');
-			}).catch(error => {
-				console.error(error);
-			})
-		}
-		</script>
-	</body>
+    <link rel="stylesheet"
+          href="css/bootstrap.min.css"/>
+    <link rel="stylesheet"
+          href="css/font-awesome.min.css"/>
+    <script type="text/javascript"
+            src="js/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+    <script type="text/javascript">
+        _atrk_opts = {atrk_acct: "edrok1a0Sn00is", domain: "kaskus.co.id", dynamic: true};
+        (function () {
+            var as = document.createElement('script');
+            as.type = 'text/javascript';
+            as.async = true;
+            as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js";
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(as, s);
+        })();
+    </script>
+    <noscript><img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=edrok1a0Sn00is" style="display:none"
+                   height="1" width="1" alt=""/></noscript>
+</head>
+<body>
+<noscript>
+    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-KGKS6M" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe>
+</noscript>
+<script>(function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+            'gtm.start': new Date().getTime(), event: 'gtm.js'
+        });
+        var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src =
+            '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-KGKS6M');</script>
+<div id="root"></div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript"
+        src="bundle.js"
+        charset="utf-8"></script>
+<script type="text/javascript">
+    +function () {
+        loadApp('root', {
+            loginPage: false,
+            tokenEndpoint: '/token',
+            domain: 'kaskus-s.obrol.id',
+            connectionUrl: 'wss://kaskus-s.obrol.id:5281/websocket'
+        })
+    }()
+</script>
+<script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.5.2/firebase-app.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.5.2/firebase-messaging.js"></script>
+<script type="text/javascript" src="app.js" charset="utf-8"></script>
+</body>
 </html>
